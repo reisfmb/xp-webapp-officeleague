@@ -1,13 +1,36 @@
 # Tasks
 
-- :white_check_mark: Fetch data from the endpoint https://officeleague.rocks/app/api/graphql
-- :white_check_mark: Parse response and convert it into Typescript data objects which will then be rendered by the app. 
-- :white_check_mark: The endpoint returns JSON which contains leaguePlayers and leagueTeams arrays, which is what we are interested in.
-- :white_check_mark: /leaguePlayers - to display a simple list of all league players. It should be possible to click a specific player and get to its details page.
-- :white_check_mark: /leaguePlayers/{0} (where {0} is leaguePlayer.id) - to display details on specific league player.
-- :white_check_mark: /leagueTeams - to display a specific league team. It should be possible to click a specific team and get to its details page.
-- :white_check_mark: /leagueTeams/{0} - (where {0} is leagueTeam.id) - to display details on specific league team.
-- :white_check_mark: Additional bonus for implementing a decent navigation to switch between the pages :)
+:white_check_mark: Fetch data from the endpoint https://officeleague.rocks/app/api/graphql 
+
+**Done**.
+
+:white_check_mark: Parse response and convert it into Typescript data objects which will then be rendered by the app 
+
+**Done and also had the opportunity to use the "Omit" utility type when defining one of the interfaces!**.
+
+:white_check_mark: The endpoint returns JSON which contains leaguePlayers and leagueTeams arrays, which is what we are interested in. 
+
+**Ok**.
+
+:white_check_mark: /leaguePlayers - to display a simple list of all league players. It should be possible to click a specific player and get to its details page 
+
+**Done**.
+
+:white_check_mark: /leaguePlayers/{0} (where {0} is leaguePlayer.id) - to display details on specific league player 
+
+**Done**.
+
+:white_check_mark: /leagueTeams - to display a specific league team. It should be possible to click a specific team and get to its details page 
+
+**Done**.
+
+:white_check_mark: /leagueTeams/{0} - (where {0} is leagueTeam.id) - to display details on specific league team 
+
+**Done**.
+
+:white_check_mark: Additional bonus for implementing a decent navigation to switch between the pages :) 
+
+**Implemented the navigation and just a basic css with boostrap**.
 
 # How to run
 

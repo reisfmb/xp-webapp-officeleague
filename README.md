@@ -43,4 +43,5 @@ enonic sandbox start
 and then access: http://localhost:8080/webapp/xp.webapp.officeleague/
 
 # Preview
-https://user-images.githubusercontent.com/67838246/137475039-6ba3e9ac-49b7-4a80-b264-02ca1b38e884.mov
+
+https://user-images.githubusercontent.com/67838246/137557684-d577e6c8-d5a5-4509-971b-5a4b3648eff2.mp4

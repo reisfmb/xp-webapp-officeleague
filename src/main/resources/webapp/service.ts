@@ -1,11 +1,28 @@
-import { ILeague, ILeaguePlayer, IPlayer, ILeagueTeam, ITeam } from './types'
+import { ILeague, ILeaguePlayer, IPlayer, IPlayerPlus, ILeagueTeam, ITeam, ITeamPlus, IPlayerStats, IPlayerStatsPlus } from './types'
 
 const httpClient = require('/lib/http-client')
 
 class Service {
     private API_URL = 'https://officeleague.rocks/app/api/graphql'
 
-    private REQUEST_BODY = JSON.stringify({"query":"{league(name:\"Enonic Foos\") {id name leaguePlayers { id rating ranking player { id name nationality stats { gameCount winningGameCount goalCount } } } leagueTeams { id rating ranking team { id name stats { gameCount winningGameCount goalCount } } } } }"})
+    private QUERY_STRING = `{
+        league(name:\"Enonic Foos\") 
+        { id name leaguePlayers 
+            { id rating ranking player 
+                { id name nationality stats 
+                    { gameCount winningGameCount goalCount } 
+                } 
+            } leagueTeams { id rating ranking team 
+                { id name stats 
+                    { gameCount winningGameCount goalCount } 
+                } 
+            } 
+        } 
+    }`
+
+    private REQUEST_BODY_JSON = { query: this.QUERY_STRING }
+
+    private REQUEST_BODY = JSON.stringify(this.REQUEST_BODY_JSON)
 
     private leagueData = {} as ILeague
 
@@ -24,11 +41,26 @@ class Service {
         this.leagueData = league
     }
 
+    private calculateStatsPlus(stats: IPlayerStats): IPlayerStatsPlus {
+        if(stats.gameCount === 0){
+            return { ...stats, winningPercentage: '0.0', lossPercentage: '0.0', goalsPerGame: '0.0' } 
+        }
+
+        return {
+            ...stats,
+            winningPercentage: (100 * stats.winningGameCount / stats.gameCount).toFixed(1),
+            lossPercentage: ((100 * (stats.gameCount - stats.winningGameCount)) / stats.gameCount).toFixed(1),
+            goalsPerGame: (stats.goalCount / stats.gameCount).toFixed(1)
+        }
+    }
+
+    ///
+
     public getLeaguePlayers(): ILeaguePlayer[]{
         return this.leagueData.leaguePlayers
     }
 
-    public getLeaguePlayerById(playerId: string): IPlayer {
+    public getLeaguePlayerById(playerId: string): IPlayerPlus {
     
         const leaguePlayers: ILeaguePlayer[] = this.getLeaguePlayers()
 
@@ -36,16 +68,19 @@ class Service {
             leaguePlayer.player.id === playerId
         ))
 
-        if(filteredPlayers.length === 0) return {} as IPlayer
+        if(filteredPlayers.length === 0) return {} as IPlayerPlus
 
-        return filteredPlayers[0].player
+        const player = filteredPlayers[0].player
+
+        return { ...player, stats: { ...this.calculateStatsPlus(player.stats) } }
+
     }
 
     public getLeagueTeams(): ILeagueTeam[] {
         return this.leagueData.leagueTeams
     }
 
-    public getLeagueTeamById(teamId: string): ITeam {
+    public getLeagueTeamById(teamId: string): ITeamPlus {
     
         const leagueTeams: ILeagueTeam[] = this.getLeagueTeams()
 
@@ -53,9 +88,11 @@ class Service {
             leagueTeam.team.id === teamId
         ))
 
-        if(filteredTeams.length === 0) return {} as ITeam
+        if(filteredTeams.length === 0) return {} as ITeamPlus
+       
+        const team = filteredTeams[0].team
 
-        return filteredTeams[0].team
+        return { ...team, stats: { ...this.calculateStatsPlus(team.stats) } }
     }
 }
 

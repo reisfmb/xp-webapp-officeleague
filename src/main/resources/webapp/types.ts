@@ -1,15 +1,29 @@
+interface IPlayerStats {
+    gameCount: number;
+    winningGameCount: number;
+    goalCount: number;  
+}
+
+interface IPlayerStatsPlus extends IPlayerStats {
+    winningPercentage: string;
+    lossPercentage: string;
+    goalsPerGame: string;  
+}
+
 interface IPlayer {
     id: string;
     name: string;
     nationality: string;
-    stats: {
-        gameCount: number;
-        winningGameCount: number;
-        goalCount: number;
-    }
+    stats: IPlayerStats
+}
+
+interface IPlayerPlus extends Omit<IPlayer, 'stats'> {
+    stats: IPlayerStatsPlus
 }
 
 type ITeam = Omit<IPlayer, 'nationality'>
+
+type ITeamPlus = Omit<IPlayerPlus, 'nationality'>
 
 interface ILeaguePlayer {
     id: string;
@@ -34,7 +48,11 @@ interface ILeague {
 
 export {
     IPlayer,
+    IPlayerStats,
+    IPlayerStatsPlus,
+    IPlayerPlus,
     ITeam,
+    ITeamPlus,
     ILeaguePlayer,
     ILeagueTeam,
     ILeague

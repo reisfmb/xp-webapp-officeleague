@@ -2,9 +2,24 @@
 
     <ul class="list-unstyled text-center my-5">
         <li><b>[[ ${data.name} ]]</b></li>
-        <li>Team stats game count: [[ ${data.stats.gameCount} ]]</li>
-        <li>Team stats winning game count: [[ ${data.stats.winningGameCount} ]]</li>
-        <li>Team stats goal count: [[ ${data.stats.goalCount} ]]</li>
+        <li>
+            Game counter: [[ ${data.stats.gameCount} ]]
+        </li>
+        <li>
+            Wins: 
+            [[ ${data.stats.winningGameCount} ]], 
+            <span class="text-success"> [[ ${data.stats.winningPercentage} ]] % </span>
+        </li>
+        <li>
+            Losses: 
+            [[ ${data.stats.gameCount - data.stats.winningGameCount} ]],
+            <span class="text-danger"> [[ ${data.stats.lossPercentage} ]] % </span>
+        </li>
+        <li>
+            Goal counter: 
+            [[ ${data.stats.goalCount} ]],
+            <span class="text-primary"> [[ ${data.stats.goalsPerGame} ]] </span> per game.
+        </li>
 
         <li class="mt-3">
             <a href="../leagueTeams">

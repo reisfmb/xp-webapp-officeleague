@@ -1,12 +1,12 @@
 <div th:replace="fragments/header :: header('League Players')" th-remove="tag"></div>
 
-    <a href="./">
-        <button class="btn btn-sm btn-outline-default">Back to home page</button>
+    <a href="./" class="fixed-top">
+        <button class="btn btn-sm btn-outline-default"><< Go back</button>
     </a>
 
     <ul th:each="player : ${data}" class="list-unstyled text-center mt-5">
         <li><b>[[ ${player.player.name} ]]</b></li>
-        <li>Player nationality: [[ ${player.player.nationality} ]]</li>
+        <li>Nationality: [[ ${player.player.nationality} ]]</li>
         <li>Rating: [[ ${player.rating} ]]</li>
         <li>Ranking: [[ ${player.ranking} ]]</li>
 

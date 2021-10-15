@@ -1,40 +1,23 @@
-= Webpack Starter for Enonic XP
+= Tasks
 
-This starter kit will set up a basic template for your new Enonic app, with support for the Webpack.
+- :white_check_mark: Fetch data from the endpoint https://officeleague.rocks/app/api/graphql
+- :white_check_mark: Parse response and convert it into Typescript data objects which will then be rendered by the app. 
+- :white_check_mark: The endpoint returns JSON which contains leaguePlayers and leagueTeams arrays, which is what we are interested in.
+- :white_check_mark: /leaguePlayers - to display a simple list of all league players. It should be possible to click a specific player and get to its details page.
+- :white_check_mark: /leaguePlayers/{0} (where {0} is leaguePlayer.id) - to display details on specific league player.
+- :white_check_mark: /leagueTeams - to display a specific league team. It should be possible to click a specific team and get to its details page.
+- :white_check_mark: /leagueTeams/{0} - (where {0} is leagueTeam.id) - to display details on specific league team.
+- :white_check_mark: Additional bonus for implementing a decent navigation to switch between the pages :)
 
-NOTE: See the official https://developer.enonic.com/start/starter-webpack[documentation] for a more detailed guide.
+= How to run
 
-== Introduction
+Considering that you have the enonic CLI installed locally, just clone the repo, enter the project folder, run ``enonic project deploy``. Finally run:
 
-Once initiated, you'll have the bare minimum needed to create a new Enonic
-application with Webpack. You'll have all the folders set up, and can get
-straight to creating what you're creating.
-
-The project will support:
-
-* Code minification;
-* Production and development environments;
-* SASS and Less support;
-* Transpilation of ECMAScript code with Babel (client- and server-side);
-* Transpilation of TypeScript code (client- and server-side).
-
-== Create a project
-
-To setup a project locally, simply run the following command:
-
-```bash
-$ enonic project create
 ```
-Complete the Wizard and make sure you choose *Webpack starter* from the list of starters
-
-```bash
-$ cd <project-folder>
+enonic sandbox start
 ```
 
-To build and deploy the project:
+and then access: http://localhost:8080/webapp/xp.webapp.officeleague/
 
-```bash
-$ enonic project deploy
-```
-
-NOTE: *Don't have the Enonic CLI?* Visit the https://developer.enonic.com/start[Getting started guide] to install it.
+= Preview
+![](preview.mov)

@@ -1,0 +1,20 @@
+<div th:replace="fragments/header :: header(${data.name})" th-remove="tag"></div>
+
+    <ul class="list-unstyled text-center my-5">
+        <li><b>[[ ${data.name} ]]</b></li>
+        <li>Player nationality: [[ ${data.nationality} ]]</li>
+        <li>Player stats game count: [[ ${data.stats.gameCount} ]]</li>
+        <li>Player stats winning game count: [[ ${data.stats.winningGameCount} ]]</li>
+        <li>Player stats goal count: [[ ${data.stats.goalCount} ]]</li>
+
+        <li class="mt-3">
+            <a href="../leaguePlayers">
+                <button class="btn btn-sm btn-outline-primary">
+                    << Back to all players of this league
+                </button>
+            </a>
+        </li>
+    </ul>
+
+<div th:replace="fragments/footer :: footer" th-remove="tag"></div>
+ 

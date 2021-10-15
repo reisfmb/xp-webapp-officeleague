@@ -1,0 +1,22 @@
+<div th:replace="fragments/header :: header('League Teams')" th-remove="tag"></div>
+
+    <a href="./">
+        <button class="btn btn-sm btn-outline-default">Back to home page</button>
+    </a>
+
+    <ul th:each="team : ${data}" class="list-unstyled text-center mt-5">
+        <li><b>[[ ${team.team.name} ]]</b></li>
+        <li>Rating: [[ ${team.rating} ]]</li>
+        <li>Ranking: [[ ${team.ranking} ]]</li>
+
+        <li class="mt-2">
+            <a th:href="'leagueTeam/' + ${team.team.id}">
+                <button class="btn btn-sm btn-outline-success">
+                    See details
+                </button>
+            </a>
+        </li>
+    </ul>
+
+<div th:replace="fragments/footer :: footer" th-remove="tag"></div>
+ 

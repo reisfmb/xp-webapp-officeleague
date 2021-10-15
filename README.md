@@ -1,4 +1,4 @@
-= Tasks
+# Tasks
 
 - :white_check_mark: Fetch data from the endpoint https://officeleague.rocks/app/api/graphql
 - :white_check_mark: Parse response and convert it into Typescript data objects which will then be rendered by the app. 
@@ -9,7 +9,7 @@
 - :white_check_mark: /leagueTeams/{0} - (where {0} is leagueTeam.id) - to display details on specific league team.
 - :white_check_mark: Additional bonus for implementing a decent navigation to switch between the pages :)
 
-= How to run
+# How to run
 
 Considering that you have the enonic CLI installed locally, just clone the repo, enter the project folder, run ``enonic project deploy``. Finally run:
 
@@ -19,5 +19,5 @@ enonic sandbox start
 
 and then access: http://localhost:8080/webapp/xp.webapp.officeleague/
 
-= Preview
-![](preview.mov)
+# Preview
+https://user-images.githubusercontent.com/67838246/137475039-6ba3e9ac-49b7-4a80-b264-02ca1b38e884.mov

@@ -6,7 +6,7 @@ const httpClient = require('/lib/http-client')
  * Get the data of "Enonic Foos" in the officeLeague API
  * and provide some getters related to that data.
  */
-class EnonicFoosService {
+class ServiceEnonicFoosLeague {
     private API_URL = 'https://officeleague.rocks/app/api/graphql'
 
     private QUERY_STRING = `{
@@ -113,4 +113,4 @@ class EnonicFoosService {
     }
 }
 
-export { EnonicFoosService }
+export { ServiceEnonicFoosLeague }

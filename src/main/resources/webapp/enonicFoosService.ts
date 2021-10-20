@@ -1,8 +1,12 @@
-import { ILeague, ILeaguePlayer, IPlayer, IPlayerPlus, ILeagueTeam, ITeam, ITeamPlus, IPlayerStats, IPlayerStatsPlus } from './types'
+import { ILeague, ILeaguePlayer, IPlayerPlus, ILeagueTeam, ITeamPlus, IStats, IStatsPlus } from './interfaces'
 
 const httpClient = require('/lib/http-client')
 
-class Service {
+/**
+ * Get the data of "Enonic Foos" in the officeLeague API
+ * and provide some getters related to that data.
+ */
+class EnonicFoosService {
     private API_URL = 'https://officeleague.rocks/app/api/graphql'
 
     private QUERY_STRING = `{
@@ -20,28 +24,29 @@ class Service {
         } 
     }`
 
-    private REQUEST_BODY_JSON = { query: this.QUERY_STRING }
-
-    private REQUEST_BODY = JSON.stringify(this.REQUEST_BODY_JSON)
+    private REQUEST_BODY = JSON.stringify({ query: this.QUERY_STRING })
 
     private leagueData = {} as ILeague
 
     constructor(){
         const response = httpClient.request({
-            url: this.API_URL,
             method: 'POST',
+            url: this.API_URL,
             body: this.REQUEST_BODY,
             contentType: 'application/json'
         });
     
         const responseBody = JSON.parse(response.body) || {}
         
-        const league: ILeague = ((responseBody.data || {}).league || {} as ILeague) 
-    
-        this.leagueData = league
+        this.leagueData = ((responseBody.data || {}).league || {} as ILeague)
     }
 
-    private calculateStatsPlus(stats: IPlayerStats): IPlayerStatsPlus {
+    /**
+     * Calculate some additional statistics based on the default statistics: gameCount, winningGameCount and goalCount.
+     * 
+     * The additional ones are: winningPercentage, lossPercentage and goalsPerGame.
+     */
+    private calculateStatsPlus(stats: IStats): IStatsPlus {
         if(stats.gameCount === 0){
             return { ...stats, winningPercentage: '0.0', lossPercentage: '0.0', goalsPerGame: '0.0' } 
         }
@@ -56,10 +61,16 @@ class Service {
 
     ///
 
+    /**
+     * Get all the Enonic Foos league players.
+     */
     public getLeaguePlayers(): ILeaguePlayer[]{
         return this.leagueData.leaguePlayers
     }
 
+    /**
+     * Get, by id, a specific Enonic foos league player with some additional statistics.
+     */
     public getLeaguePlayerById(playerId: string): IPlayerPlus {
     
         const leaguePlayers: ILeaguePlayer[] = this.getLeaguePlayers()
@@ -76,10 +87,16 @@ class Service {
 
     }
 
+    /**
+     * Get all the Enonic Foos league teams.
+     */
     public getLeagueTeams(): ILeagueTeam[] {
         return this.leagueData.leagueTeams
     }
 
+    /**
+     * Get, by id, a specific Enonic foos league team with some additional statistics.
+     */
     public getLeagueTeamById(teamId: string): ITeamPlus {
     
         const leagueTeams: ILeagueTeam[] = this.getLeagueTeams()
@@ -96,4 +113,4 @@ class Service {
     }
 }
 
-export { Service }
+export { EnonicFoosService }

@@ -1,0 +1,21 @@
+body {
+  background-color: rgb(240, 240, 240);
+}
+
+table {
+  background-color: white;
+}
+
+table tbody tr:nth-child(1) {
+  background-color: lightgoldenrodyellow;
+}
+table tbody tr:nth-child(2) {
+  background-color: lightgray;
+}
+table tbody tr:nth-child(3) {
+  background-color: #ff9292;
+}
+
+.border {
+  background-color: white;
+}

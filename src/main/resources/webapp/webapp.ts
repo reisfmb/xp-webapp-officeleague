@@ -1,9 +1,9 @@
-import { Service } from './service'
-
 const thymeleaf = require('/lib/thymeleaf')
 const router = require('/lib/router')()
 
-const service = new Service()
+import { EnonicFoosService } from "./enonicFoosService";
+
+const enonicFoosService = new EnonicFoosService()
 
 router.get('/', function() {
     return  { body: thymeleaf.render(resolve('./views/welcome.html'), {}) }
@@ -11,7 +11,7 @@ router.get('/', function() {
 
 router.get('/leaguePlayers', function() {
     return  { body: thymeleaf.render(resolve('./views/leaguePlayers.html'), {
-        data: service.getLeaguePlayers()
+        data: enonicFoosService.getLeaguePlayers()
     }) }
 });
 
@@ -19,13 +19,13 @@ router.get('/leaguePlayer/{id}', function(req: any) {
     const id = req.pathParams.id
 
     return  { body: thymeleaf.render(resolve('./views/leaguePlayer.html'), {
-        data: service.getLeaguePlayerById(id)
+        data: enonicFoosService.getLeaguePlayerById(id)
     }) }
 });
 
 router.get('/leagueTeams', function() {
     return  { body: thymeleaf.render(resolve('./views/leagueTeams.html'), {
-        data: service.getLeagueTeams()
+        data: enonicFoosService.getLeagueTeams()
     }) }
 });
 
@@ -33,7 +33,7 @@ router.get('/leagueTeam/{id}', function(req: any) {
     const id = req.pathParams.id
 
     return  { body: thymeleaf.render(resolve('./views/leagueTeam.html'), {
-        data: service.getLeagueTeamById(id)
+        data: enonicFoosService.getLeagueTeamById(id)
     }) }
 });
 

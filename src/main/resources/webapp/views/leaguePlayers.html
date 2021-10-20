@@ -1,23 +1,27 @@
-<div th:replace="fragments/header :: header('League Players')" th-remove="tag"></div>
+<div th:replace="fragments/header :: header('League Players')" th:remove="tag"></div>
 
-    <a href="./" class="fixed-top">
-        <button class="btn btn-sm btn-outline-default"><< Go back</button>
-    </a>
+    <a href="./"><< Go back</a>
 
-    <ul th:each="player : ${data}" class="list-unstyled text-center mt-5">
-        <li><b>[[ ${player.player.name} ]]</b></li>
-        <li>Nationality: [[ ${player.player.nationality} ]]</li>
-        <li>Rating: [[ ${player.rating} ]]</li>
-        <li>Ranking: [[ ${player.ranking} ]]</li>
+    <table class="table table-hover my-5 mx-auto w-50 text-center">
+        <thead>
+            <th>Ranking</th>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Nationality</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr th:each="player,iter : ${data}">
+                <td>[[ ${player.ranking} ]]</td>
+                <td>[[ ${player.player.name} ]]</td>
+                <td>[[ ${player.rating} ]]</td>
+                <td>[[ ${player.player.nationality} ]]</td>
+                <td>
+                    <a  th:href="'leaguePlayer/' + ${player.player.id}" class="text-info">Details...</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-        <li class="mt-2">
-            <a th:href="'leaguePlayer/' + ${player.player.id}">
-                <button class="btn btn-sm btn-outline-primary">
-                    See details
-                </button>
-            </a>
-        </li>
-    </ul>
-
-<div th:replace="fragments/footer :: footer" th-remove="tag"></div>
+<div th:replace="fragments/footer :: footer" th:remove="tag"></div>
  

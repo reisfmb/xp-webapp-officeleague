@@ -119,7 +119,7 @@ function addBabelSupport(cfg) {
   const entries = listEntries('{js,es,es6}', [
     // Add additional files to the ignore list.
     // The following path will be transformed to 'src/main/resources/lib/observe/observe.es6':
-    'lib/observe/observe.es6'
+    // 'lib/observe/observe.es6'
   ]);
 
   return R.pipe(

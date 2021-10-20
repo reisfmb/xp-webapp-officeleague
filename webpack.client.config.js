@@ -45,7 +45,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       publicPath: '{{staticAssetUrl}}', // This placeholder be replaced with url for serving static assets
-      template: path.join(__dirname, '/src/main/resources/template/main.html'),
+      //template: path.join(__dirname, '/src/main/resources/template/main.html'),
     })
   ],
   mode: env.type,
@@ -68,7 +68,7 @@ function addTypeScriptSupport(cfg) {
   };
 
   return R.pipe(
-    setEntry('ts/bundle', './ts/main.ts'),
+    //setEntry('ts/bundle', './ts/main.ts'),
     addRule(rule),
     prependExtensions(['.tsx', '.ts', '.json'])
   )(cfg);
@@ -96,7 +96,7 @@ function addBabelSupport(cfg) {
   };
 
   return R.pipe(
-    setEntry('js/bundle', './js/main.es6'),
+    //setEntry('js/bundle', './js/main.es6'),
     addRule(rule),
     prependExtensions(['es6', '.jsx', '.js', '.json'])
   )(cfg);

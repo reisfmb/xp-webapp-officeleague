@@ -2,7 +2,7 @@
 
     <a href="../leaguePlayers" class="text-info"><< Back to all players of this league</a>
 
-    <ul class="list-unstyled text-center my-5 border rounded p-5">
+    <ul th:if="${data}" class="list-unstyled text-center my-5 border rounded p-5">
         <li><b>[[ ${data.name} ]]</b></li>
         <li>
             Nationality: [[ ${data.nationality} ]]

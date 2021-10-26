@@ -1,5 +1,5 @@
 import { ILeague, ILeaguePlayer, IPlayerPlus, ILeagueTeam, ITeamPlus, IStats, IStatsPlus } from './interfaces'
-
+import { Stats } from './stats'
 const httpClient = require('/lib/http-client')
 
 /**
@@ -26,6 +26,8 @@ class ServiceEnonicFoosLeague {
 
     private REQUEST_BODY = JSON.stringify({ query: this.QUERY_STRING })
 
+    public ERROR_MESSAGE = '' 
+
     private leagueData = {} as ILeague
 
     constructor(){
@@ -35,8 +37,12 @@ class ServiceEnonicFoosLeague {
             body: this.REQUEST_BODY,
             contentType: 'application/json'
         });
-    
+
         const responseBody = JSON.parse(response.body) || {}
+
+        if(response.status !== 200){
+            this.ERROR_MESSAGE = responseBody.message
+        }
         
         this.leagueData = ((responseBody.data || {}).league || {} as ILeague)
     }
@@ -47,15 +53,14 @@ class ServiceEnonicFoosLeague {
      * The additional ones are: winningPercentage, lossPercentage and goalsPerGame.
      */
     private calculateStatsPlus(stats: IStats): IStatsPlus {
-        if(stats.gameCount === 0){
-            return { ...stats, winningPercentage: '0.0', lossPercentage: '0.0', goalsPerGame: '0.0' } 
-        }
+
+        const statsInstance = new Stats(stats)
 
         return {
             ...stats,
-            winningPercentage: (100 * stats.winningGameCount / stats.gameCount).toFixed(1),
-            lossPercentage: ((100 * (stats.gameCount - stats.winningGameCount)) / stats.gameCount).toFixed(1),
-            goalsPerGame: (stats.goalCount / stats.gameCount).toFixed(1)
+            winningPercentage: statsInstance.getWinningPercentage(),
+            lossPercentage: statsInstance.getLossPercentage(),
+            goalsPerGame: statsInstance.getGoalsPerGame()
         }
     }
 

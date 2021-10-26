@@ -4,37 +4,33 @@ const router = require('/lib/router')()
 import { ServiceEnonicFoosLeague } from "./serviceEnonicFoosLeague";
 
 const serviceEnonicFoosLeague = new ServiceEnonicFoosLeague()
+const errorMessage = serviceEnonicFoosLeague.ERROR_MESSAGE
+const model = { errorMessage, data: {} }
 
 router.get('/', function() {
-    return  { body: thymeleaf.render(resolve('./views/welcome.html'), {}) }
+    return  { body: thymeleaf.render(resolve('./views/welcome.html'), model) }
 });
 
 router.get('/leaguePlayers', function() {
-    return  { body: thymeleaf.render(resolve('./views/leaguePlayers.html'), {
-        data: serviceEnonicFoosLeague.getLeaguePlayers()
-    }) }
+    model.data = serviceEnonicFoosLeague.getLeaguePlayers()
+    return  { body: thymeleaf.render(resolve('./views/leaguePlayers.html'), model) }
 });
 
 router.get('/leaguePlayer/{id}', function(req: any) {
     const id = req.pathParams.id
-
-    return  { body: thymeleaf.render(resolve('./views/leaguePlayer.html'), {
-        data: serviceEnonicFoosLeague.getLeaguePlayerById(id)
-    }) }
+    model.data = serviceEnonicFoosLeague.getLeaguePlayerById(id)
+    return  { body: thymeleaf.render(resolve('./views/leaguePlayer.html'), model) }
 });
 
 router.get('/leagueTeams', function() {
-    return  { body: thymeleaf.render(resolve('./views/leagueTeams.html'), {
-        data: serviceEnonicFoosLeague.getLeagueTeams()
-    }) }
+    model.data = serviceEnonicFoosLeague.getLeagueTeams()
+    return  { body: thymeleaf.render(resolve('./views/leagueTeams.html'), model) }
 });
 
 router.get('/leagueTeam/{id}', function(req: any) {
     const id = req.pathParams.id
-
-    return  { body: thymeleaf.render(resolve('./views/leagueTeam.html'), {
-        data: serviceEnonicFoosLeague.getLeagueTeamById(id)
-    }) }
+    model.data = serviceEnonicFoosLeague.getLeagueTeamById(id)
+    return  { body: thymeleaf.render(resolve('./views/leagueTeam.html'), model) }
 });
 
 exports.all = function(req: Request) {
